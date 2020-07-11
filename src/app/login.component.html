@@ -1,0 +1,12 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+    <form [formGroup]="loginForm" (ngSubmit)= "login(loginForm.value)">
+      <input type="text" placeholder="Enter Email IDs" [formControl]="userName">
+      <input type="password" placeholder="Enter your password" [formControl]="password">
+      <!-- {{this.loginForm.value.recaptcha}} -->
+      <recaptcha *ngIf="this.showCaptcha"
+            [formControl]="recaptcha">
+      </recaptcha>
+      <button type="submit">Login</button>
+    </form>
+  </div>

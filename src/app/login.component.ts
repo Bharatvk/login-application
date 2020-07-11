@@ -4,11 +4,10 @@ import {FormGroup, FormBuilder, FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  templateUrl: './login.component.html'
 })
 
-export class AppComponent {
+export class LoginComponent {
   constructor(private fb: FormBuilder, private router: Router){
 
   }
