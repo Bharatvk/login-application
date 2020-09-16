@@ -1,1 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
+
+$theme-color :#66ff66;
+$theme-border:#00cc00;
+$theme-hover:#009900;
+
+.primaryColor{
+ color:  #66ff66;
+}
+.primaryButton
+{
+background-color:$theme-color ;
+border-color:$theme-border ;
+color:#ffffff;
+}
+.primaryButton:hover{
+    background-color:$theme-hover ;
+    color:#ffffff;
+}
+
+.secondaryButton{
+    background-color:#C8C8C8 ;  
+    color:#ffffff; 
+}
+
+.secondaryButton:hover {
+    background-color:#989898 ;  
+    color:#ffffff; 
+}

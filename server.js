@@ -1,13 +1,19 @@
-const http = require('http');
 
-const hostname = '127.0.0.1';
-const port = 3000;
-var express = require('express')
-var app = express()
-app.get('/', function (req, res) {
-  res.send('Hello World')
-})
+const express = require('express');
+const cors = require('cors');
+const app = express();
+
+
+app.use(cors());
+
+
 
 app.listen(8080, function () {
   console.log('App listening on port 8080!')
 })
+
+app.get('/validate', function (req, res) {
+  console.log('came here')
+  res.send('Hello World')
+})
+
