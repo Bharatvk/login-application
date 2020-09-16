@@ -1,24 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-const axios = require('axios').default;
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable({
   providedIn: 'root',
 })
 export class GenericService {
-  constructor() {}
+  constructor(private http:HttpClient) {}
+  validateConnection (){
+  return  this.http.post('http://localhost:6066/validate', { title: 'Angular POST Request Example' })
 
-   validateConnection() : Observable<any[]> {
-  
-    let observable$ = Observable.create( ( observer ) => {
-      axios.get( 'http://localhost/validate' )
-      .then( ( response ) => {
-          observer.next( response.data );
-          observer.complete();
-      } )
-      .catch( ( error ) => {
-          observer.error( error );
-      } );
-  } );
-   return observable$
 }
 }

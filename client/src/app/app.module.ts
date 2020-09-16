@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import {HeaderComponent} from './header/header.component'
 import {LandingComponent} from './landing/landing.component'
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClient,HttpClientModule} from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,8 +19,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [HttpClient],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
