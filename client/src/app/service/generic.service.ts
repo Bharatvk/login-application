@@ -11,13 +11,13 @@ export class GenericService {
 }
 getDbCollections (params){
   console.log(params);
-  return  this.http.post('http://localhost:6066/database/getDbCollections',params)
+  return  this.http.post('http://localhost:6066/api/connection/getDbCollections',params)
 
 }
 
 getdocuments (params){
   console.log(params);
-  return  this.http.post('http://localhost:6066/database/getdocuments',params)
+  return  this.http.post('http://localhost:6066/api/connection/getdocuments',params)
 
 }
 

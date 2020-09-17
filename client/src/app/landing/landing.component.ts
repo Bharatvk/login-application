@@ -34,7 +34,7 @@ export class LandingComponent implements OnInit {
          var connection_string = this.connectionForm.value.connection_string 
           console.log(this.connectionForm.value.connection_string);
           this.closebutton.nativeElement.click();
-          localStorage.setItem('connection_string',connection_string)
+          sessionStorage.setItem('connection_string',connection_string)
           this.router.navigate(['/dashboard']);
         } else {
           console.log('Not found');

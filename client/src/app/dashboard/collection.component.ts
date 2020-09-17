@@ -20,7 +20,7 @@ export class CollectionComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    let connection_string = localStorage.getItem('connection_string');
+    let connection_string = sessionStorage.getItem('connection_string');
     this.GenericService.getdocuments({connection_string : connection_string, collection: this.collection}).subscribe((data:any)=>{
       console.log(data);
     this.documents = data.documents;

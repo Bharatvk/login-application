@@ -7,7 +7,7 @@ import { GenericService } from '../service/generic.service'
 })
 export class DashboardComponent implements OnInit {
 
-   connection_string = localStorage.getItem('connection_string');
+   connection_string = sessionStorage.getItem('connection_string');
    collections : any;
 
   constructor(private GenericService : GenericService) {
