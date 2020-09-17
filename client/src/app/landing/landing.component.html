@@ -1,41 +1,55 @@
-<div class="container-fluid">
+<div *ngIf="step == 'landing'" class="container-fluid">
+  <div *ngIf="step == 'landing'">
+    <div>
+      <img src="../../assets/mongo.png" width="100%">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
+        laborum.</p>
 
-<div>
-<img src="../../assets/mongo.png" width="100%"> 
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-</div>
-
-
-   <!-- Button trigger modal -->
-<button type="button" class="btn primaryButton" data-toggle="modal" data-target="#exampleModal">
-    Continue
-  </button>
-  
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Connection String</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-        <form [formGroup]="connectionForm">
-        <div class="form-group">
-       <textarea placeholder="Enter connection string" formControlName="connection_string" class="col-12 form-control"></textarea>
-        </div>
-        </form>
     </div>
 
-        <div class="modal-footer">
-          <button type="button" class="btn secondaryButton" data-dismiss="modal">Close</button>
-          <button type="button" class="btn primaryButton" (click)="submit()">Proceed</button>
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn primaryButton" data-toggle="modal" data-target="#exampleModal">
+      Continue
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Connection String</h5>
+            <button type="button" class="close" #closebutton data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="connectionForm">
+              <div class="form-group">
+                <textarea placeholder="Enter connection string" formControlName="connection_string"
+                  class="col-12 form-control"></textarea>
+              </div>
+            </form>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn secondaryButton" data-dismiss="modal">Close</button>
+            <button type="button" class="btn primaryButton" (click)="submit()">Proceed</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-
 </div>
+  <div style="height: 100%;" *ngIf="step == 'successConnection'">
+    <div style="min-height: 100%;" class="row">
+       <div style="min-height: 100%; border: 2px solid black;" class="col-md-4">
+         <div *ngFor = "let collection of collectionsList">
+           <div>{{collection}}</div>
+         </div>
+       </div> 
+    </div>
+  </div>
