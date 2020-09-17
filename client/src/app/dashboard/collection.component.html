@@ -1,0 +1,14 @@
+<div class="container">
+
+
+
+    <div *ngFor="let document of documents">
+        <div class="table-id" >{{document._id}}</div>
+        <div class="view-json" id="json_{{document._id}}" >
+            <pre>
+                    {{document|json}}
+          </pre>
+        </div>
+    </div>
+
+</div>

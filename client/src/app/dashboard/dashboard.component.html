@@ -1,0 +1,7 @@
+<div class="container">
+<label>Database List</label>
+    <div *ngFor="let collection of collections">
+        <lable> <input type="checkbox" value="{{collection}}"> {{collection}}</lable> <a [routerLink]="['/dashboard',collection]" routerLinkActive="router-link-active" >Open</a>
+    </div>
+
+</div>
