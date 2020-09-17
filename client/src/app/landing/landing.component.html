@@ -1,11 +1,20 @@
-<div class="container-fluid">
+<div *ngIf="step == 'landing'" class="container-fluid">
+  <div *ngIf="step == 'landing'">
+    <div>
+      <img src="../../assets/mongo.png" width="100%">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
+        laborum.</p>
 
-<div>
-<img src="../../assets/mongo.png" width="100%"> 
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </div>
 
-</div>
 
+    <!-- Button trigger modal -->
+    <button type="button" class="btn primaryButton" data-toggle="modal" data-target="#exampleModal">
+      Continue
+    </button>
 
    <!-- Button trigger modal -->
 <button type="button" class="btn primaryButton" data-toggle="modal" data-target="#exampleModal">
@@ -37,5 +46,13 @@
       </div>
     </div>
   </div>
-
 </div>
+  <div style="height: 100%;" *ngIf="step == 'successConnection'">
+    <div style="min-height: 100%;" class="row">
+       <div style="min-height: 100%; border: 2px solid black;" class="col-md-4">
+         <div *ngFor = "let collection of collectionsList">
+           <div>{{collection}}</div>
+         </div>
+       </div> 
+    </div>
+  </div>
