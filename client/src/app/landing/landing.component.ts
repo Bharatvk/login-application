@@ -1,45 +1,45 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import{ FormBuilder,FormGroup}from '@angular/forms'
-import {GenericService} from '../service/generic.service'
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { GenericService } from '../service/generic.service';
 import { Subscriber } from 'rxjs';
+import {Router} from "@angular/router"
+
 
 @Component({
   selector: 'app-landing',
   templateUrl: './landing.component.html',
-  styleUrls: ['./landing.component.scss']
+  styleUrls: ['./landing.component.scss'],
 })
 export class LandingComponent implements OnInit {
-  @ViewChild('closebutton') closebutton;
+  @ViewChild('closebutton',{ read: ElementRef }) closebutton;
   public connectionForm: FormGroup;
-  public step: String = "landing";
-  public collectionsList: any;
-  constructor(private fb: FormBuilder,
-    private GenericService : GenericService
-    ) { }
+  constructor(
+    private fb: FormBuilder,
+    private GenericService: GenericService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
+    
     this.connectionForm = this.fb.group({
-      "connection_string":['']
-    })
+      connection_string: [''],
+    });
   }
 
-  submit(){
-    console.log("value",this.connectionForm.value);
-    var connection_string = this.connectionForm.value? this.connectionForm.value.connection_string: "";
-    var params = {
-      connection_string: connection_string
-    }
-    this.GenericService.validateConnection(params).subscribe((response:any)=>{
-      console.log(response);
-      this.closebutton.nativeElement.click();
-      if(response.status == "success"){
-        this.step = "successConnection";
-        this.collectionsList = response.collections;
-
+  submit() {
+    console.log(this.connectionForm.value);
+    this.GenericService.validateConnection(this.connectionForm.value).subscribe(
+      (response: any) => {
+        if (response.status == 'success') {
+         var connection_string = this.connectionForm.value.connection_string 
+          console.log(this.connectionForm.value.connection_string);
+          this.closebutton.nativeElement.click();
+          localStorage.setItem('connection_string',connection_string)
+          this.router.navigate(['/dashboard']);
+        } else {
+          console.log('Not found');
+        }
       }
-    } )
-    
-    
+    );
   }
-
 }

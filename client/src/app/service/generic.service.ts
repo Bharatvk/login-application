@@ -9,4 +9,18 @@ export class GenericService {
   return  this.http.post('http://localhost:6066/api/connection/connectDatabase', params)
 
 }
+getDbCollections (params){
+  console.log(params);
+  return  this.http.post('http://localhost:6066/database/getDbCollections',params)
+
+}
+
+getdocuments (params){
+  console.log(params);
+  return  this.http.post('http://localhost:6066/database/getdocuments',params)
+
+}
+
+
+
 }

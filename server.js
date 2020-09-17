@@ -11,6 +11,7 @@ app.use(express.json());
 const connection = require('./controllers/connection.controller.js');
 app.use(cors());
 
+var database = require ('./controllers/database.controller')
 
 
 
