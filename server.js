@@ -11,14 +11,12 @@ app.use(express.json());
 
 app.use(cors());
 
+var database = require ('./controllers/database.controller')
 
 
 
+app.use('/database', database);
 
-app.use('/validate',  (req, res) => {
-  console.log('came here')
-  res.send({status:"success"})
-})
 app.listen(6066, function () {
   console.log('App listening on port 8080!')
 })

@@ -5,8 +5,22 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class GenericService {
   constructor(private http:HttpClient) {}
-  validateConnection (){
-  return  this.http.post('http://localhost:6066/validate', { title: 'Angular POST Request Example' })
+  validateConnection (params){
+  return  this.http.post('http://localhost:6066/database/validate', params)
 
 }
+getDbCollections (params){
+  console.log(params);
+  return  this.http.post('http://localhost:6066/database/getDbCollections',params)
+
+}
+
+getdocuments (params){
+  console.log(params);
+  return  this.http.post('http://localhost:6066/database/getdocuments',params)
+
+}
+
+
+
 }
