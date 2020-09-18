@@ -12,8 +12,9 @@
         </div>
 
         <div class="col-sm-12 col-lg-9" id="list-collection">
-        <div class="font-weight-bold">Database: {{single_collection}} </div>
-            <form [formGroup]="findForm">
+       
+            <form [formGroup]="findForm" id="findForm">
+            <div class="font-weight-bold">Database: {{single_collection}} </div>
             <div class="row" id="find-form">
                 <div class="col-12">
                  <input class="form-control" formControlName="find_query" placeholder="" placeholder="Find Query" title="JSON format">

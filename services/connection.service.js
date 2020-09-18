@@ -60,15 +60,27 @@ function getdocuments(params) {
     console.log(params)
 
     collection = params.collection;
-    console.log(collection);
+    skip = (params.skip!=null)?parseInt(params.skip):0;
+
+    limit = (params.limit!=null)?parseInt(params.limit):20;
+
+    find = (params.find_query!=null)?JSON.parse(params.find_query):{};
+
+    projection = (params.projection!=null)?JSON.parse(params.projection):{};
+
+    sort = (params.sort!=null)?JSON.parse(params.sort):{};
+
+    // ,filter,projection,skip,limit
     return new Promise(function(resolve, reject) {
     const db = mongojs(params.connection_string);
+
     db.on('error', function(err) {
         console.log('we had an error.', err.toString());
         var error = err.toString()
         resolve({status: "failed", message: "Failed to connect to the database", error: error})
       });
-    db[collection].find({}).limit(10, (err, response) => {
+
+    db[collection].find(find,projection).sort().skip(skip).limit(limit, (err, response) => {
         if (err) {
             resolve({status: "failed", message: "Failed to connect to the database", error: err})
         } else {
