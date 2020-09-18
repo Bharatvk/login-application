@@ -57,19 +57,73 @@ function getDbCollections(params) {
 }
 
 function getdocuments(params) {
-    console.log(params)
+    console.log("getdocuments",params)
+    try{
 
-    collection = params.collection;
-    skip = (params.skip!=null)?parseInt(params.skip):0;
+    var collection = params.collection;
+   var skip = (params.skip!=null)?parseInt(params.skip):0;
 
-    limit = (params.limit!=null)?parseInt(params.limit):20;
+    var limit = (params.limit!=null)?parseInt(params.limit):20;
+    var find = {};
+        if(params.find_query!= null){
+        // params.find_query= params.find_query.replace("ObjectId", "mongojs.ObjectId");
+        var multipleQuery = params.find_query.split(",");
+        for(var i = 0; i < multipleQuery.length; i++){
+            var findArray =  multipleQuery[i].split(":");
+            console.log("findArray--",findArray );
+            if(findArray.length == 2){
+               
+                    findArray[0]=  findArray[0].replace(/{/g, '');
+                    findArray[0]=  findArray[0].replace(/"/g, '').trim();
+                    findArray[1] = findArray[1].replace(/\)/g, '');
+                    findArray[1]=  findArray[1].replace(/}/g, '');
+                    findArray[1] = findArray[1].replace(/ObjectId\(/g, '');
+                    findArray[1]=  findArray[1].replace(/"/g, '').trim();
+                    // findArray[i] = findArray[i].toString();
+                    console.log("find Array--=", findArray);
+                    if(params.find_query.includes("ObjectId")){
+                    find[findArray[0].toString()] = mongojs.ObjectId(findArray[1]);
+                    } else {
+                    find[findArray[0].toString()] =findArray[1];
+                    }
+                // console.log("find array fina;--", findArray);
+            }
+        }
+    }
+        console.log("find obj==", find);
+       
+    // else {
+    //     console.log("params find query--", params.find_query);
+    //     var findArray =  params.find_query.split(":");
+    //     if(findArray.length == 2){
 
-    find = (params.find_query!=null)?JSON.parse(params.find_query):{};
+    //     }
+    //     // find = (params.find_query!=null)?JSON.parse(params.find_query):{};
+    // }
 
-    projection = (params.projection!=null)?JSON.parse(params.projection):{};
 
-    sort = (params.sort!=null)?JSON.parse(params.sort):{};
+//    var projection = (params.projection!=null)?JSON.parse(params.projection):{};
+    var projection = {};
+    if(params.projection){
+        var multipleQuery = params.projection.split(",");
+        for(var i = 0; i < multipleQuery.length; i++){
+    var projectionArray =  multipleQuery[i].split(":");
+    if(projectionArray.length == 2){
+        projectionArray[0]=  projectionArray[0].replace(/{/g, '');
+        projectionArray[0]=  projectionArray[0].replace(/"/g, '').trim();
+        projectionArray[1] = projectionArray[1].replace(/\)/g, '');
+        projectionArray[1]=  projectionArray[1].replace(/}/g, '');
+        projectionArray[1] = projectionArray[1].replace(/ObjectId\(/g, '');
+        projectionArray[1]=  projectionArray[1].replace(/"/g, '').trim();
+        console.log("projectionArray[1]--", projectionArray[1]);
+        projection[projectionArray[0].toString()] = parseInt(projectionArray[1]);
+    }    
+}
+}
+    console.log("projection...", projection);
 
+    // var sort = (params.sort!=null)?JSON.parse(params.sort):{};
+    console.log("find queru===", find)
     // ,filter,projection,skip,limit
     return new Promise(function(resolve, reject) {
     const db = mongojs(params.connection_string);
@@ -82,12 +136,18 @@ function getdocuments(params) {
 
     db[collection].find(find,projection).sort().skip(skip).limit(limit, (err, response) => {
         if (err) {
+            console.log("err---", err);
             resolve({status: "failed", message: "Failed to connect to the database", error: err})
         } else {
+            console.log("response---", response);
         resolve({status: "success", message: "Documents fetched succesfully", documents: response});
             
         }
 
     })
 });
+
+}catch(err){
+    console.log("err----", err);
+}
 }

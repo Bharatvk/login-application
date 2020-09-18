@@ -42,14 +42,14 @@
             </form>   
 
 
-            <div *ngFor="let document of documents" class="mb-2">
-                <div class="table-id p-1" (click)="toggleJson(document._id)">{{document._id}}<span class="float-right"
-                        id="arrow_{{document._id}}"><svg width="1em" height="1em" viewBox="0 0 16 16"
+            <div *ngFor="let document of documents;let id= index" class="mb-2">
+                <div class="table-id p-1" (click)="toggleJson(id);">{{document._id ? document._id : '_id: '}}<span class="float-right"
+                        id="arrow_{{id}}"><svg width="1em" height="1em" viewBox="0 0 16 16"
                             class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
                         </svg></span> </div>
-                <div class="view-json" id="json_{{document._id}}">
+                <div class="view-json" id="json_{{id}}">
                     <pre>
                             {{document|json}}
                   </pre>

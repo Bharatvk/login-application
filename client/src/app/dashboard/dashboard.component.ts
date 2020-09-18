@@ -56,7 +56,7 @@ export class DashboardComponent implements OnInit {
   }
 
   toggleJson(id) {
-    console.log('clicked');
+    console.log('clicked', id);
     var division = <HTMLElement>document.getElementById('json_' + id);
     var span = <HTMLElement>document.getElementById('arrow_' + id);
 
