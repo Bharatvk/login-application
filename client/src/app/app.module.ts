@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HeaderComponent} from './header/header.component'
 import {LandingComponent} from './landing/landing.component'
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 import { HttpClient,HttpClientModule} from '@angular/common/http';
 
 @NgModule({
@@ -19,6 +19,7 @@ import { HttpClient,HttpClientModule} from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    FormsModule,
     HttpClientModule
   ],
   providers: [HttpClient],

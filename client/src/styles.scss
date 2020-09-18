@@ -1,36 +1,69 @@
 /* You can add global styles to this file, and also import other style files */
 
-$theme-color :#66ff66;
-$theme-border:#00cc00;
-$theme-hover:#009900;
+$theme-color: #66ff66;
+$theme-border: #00cc00;
+$theme-hover: #009900;
 
-.primaryColor{
- color:  #66ff66;
+.primaryColor {
+  color: #66ff66;
 }
-.primaryButton
-{
-background-color:$theme-color ;
-border-color:$theme-border ;
-color:#ffffff;
+.primaryButton {
+  background-color: $theme-color;
+  border-color: $theme-border;
+  color: #ffffff;
 }
-.primaryButton:hover{
-    background-color:$theme-hover ;
-    color:#ffffff;
+.primaryButton:hover {
+  background-color: $theme-hover;
+  color: #ffffff;
 }
 
-.secondaryButton{
-    background-color:#C8C8C8 ;  
-    color:#ffffff; 
+.secondaryButton {
+  background-color: #c8c8c8;
+  color: #ffffff;
 }
 
 .secondaryButton:hover {
-    background-color:#989898 ;  
-    color:#ffffff; 
+  background-color: #989898;
+  color: #ffffff;
 }
-.table-id{
-    background-color: #C8C8C8;
+.table-id {
+  background-color: #c8c8c8;
+  cursor: pointer;
+  width: 100%;
 }
-.view-json{
-    color: #ffffff;
-    background-color: #000000;
+.view-json {
+  color: #ffffff;
+  background-color: #000000;
+  display: none;
+  max-height: 200px;
+  overflow-x: auto;
+}
+#list-collection {
+  max-height: 700px;
+  overflow-x: auto;
+}
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 2px grey;
+  border-radius: 3px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: $theme-color;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: $theme-hover;
+}
+
+#find-form div{
+    padding: 5px;
 }

@@ -1,7 +1,61 @@
-<div class="container">
-<label>Database List</label>
-    <div *ngFor="let collection of collections">
-        <lable> <input type="checkbox" value="{{collection}}"> {{collection}}</lable> <a [routerLink]="['/dashboard',collection]" routerLinkActive="router-link-active" >Open</a>
+<div class="container-fluid">
+
+
+    <div class="row">
+        <div class="col-sm-12 col-lg-3" id="list-collection">
+            <label>Database List</label>
+            <div *ngFor="let collection of collections">
+
+                <input type="checkbox" value="{{collection}}"> <button  class="btn btn-link list-button" [ngClass]="{'font-weight-bold': collection == single_collection}" id="list-button_{{collection}}"
+                    (click)="viewdocuments(collection)"> {{collection}} </button> </div>
+
+        </div>
+
+        <div class="col-sm-12 col-lg-9" id="list-collection">
+        <div class="font-weight-bold">Database: {{single_collection}} </div>
+            <form [formGroup]="findForm">
+            <div class="row" id="find-form">
+                <div class="col-12">
+                 <input class="form-control" formControlName="find_query" placeholder="" placeholder="Find Query" title="JSON format">
+                 
+                </div>
+                <div class="col-12">
+                    <input class="form-control" formControlName="projection" placeholder="Projection">
+                </div>
+                <div class="col-4">
+                    <input class="form-control" formControlName="sort" placeholder="Sort">
+                </div>
+                <div class="col-4">
+                    <input class="form-control" formControlName="skip" placeholder="Skip">
+                </div>
+                <div class="col-4">
+                    <input class="form-control" formControlName="limit" placeholder="Limit">
+                </div>
+                <div class="text-right">
+                  
+                    <button class="btn secondaryButton mr-2 p-2"  type="reset">Reset</button>
+                    <button class="btn primaryButton   p-2" (click)="executeFind()" type="button">Find</button>
+                    
+                </div>
+                </div>               
+            </form>   
+
+
+            <div *ngFor="let document of documents" class="mb-2">
+                <div class="table-id p-1" (click)="toggleJson(document._id)">{{document._id}}<span class="float-right"
+                        id="arrow_{{document._id}}"><svg width="1em" height="1em" viewBox="0 0 16 16"
+                            class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                        </svg></span> </div>
+                <div class="view-json" id="json_{{document._id}}">
+                    <pre>
+                            {{document|json}}
+                  </pre>
+                </div>
+            </div>
+        </div>
     </div>
+
 
 </div>
