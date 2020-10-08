@@ -78,4 +78,22 @@ export class DashboardComponent implements OnInit {
     this.getDocuments(this.findForm.value)
 
   }
+
+  downloadRecords(){
+    this.findForm.value.connection_string = this.connection_string;
+    this.findForm.value.collection = this.single_collection;
+    console.log("this.findForm.value", this.findForm.value)
+    this.GenericService.downloadRecords(this.findForm.value).subscribe((data: any) => {
+      console.log(data);
+      this.GenericService.downloadFile(data).subscribe((blob: any) => {
+        const a = document.createElement('a')
+        // const objectUrl = window.URL.createObjectURL(blob)
+        a.href = 'http://localhost:6066/api/connection/downloadFile/'+data.filename;
+        a.download = data.filename;
+        // a.target = "_blank"
+        a.click();
+        // URL.revokeObjectURL(objectUrl);
+      })
+    });
+  }
 }

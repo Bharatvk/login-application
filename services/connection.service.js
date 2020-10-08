@@ -4,6 +4,7 @@ var connectionService = {};
 connectionService.connectDatabase = connectDatabase;
 connectionService.getDbCollections = getDbCollections;
 connectionService.getdocuments = getdocuments;
+connectionService.constructQuery =constructQuery;
 module.exports = connectionService;
 
 function connectDatabase(params){
@@ -61,7 +62,37 @@ function getdocuments(params) {
     try{
 
     var collection = params.collection;
-   var skip = (params.skip!=null)?parseInt(params.skip):0;
+   var query =  constructQuery(params);
+    // ,filter,projection,skip,limit
+    return new Promise(function(resolve, reject) {
+    const db = mongojs(params.connection_string);
+
+    db.on('error', function(err) {
+        console.log('we had an error.', err.toString());
+        var error = err.toString()
+        resolve({status: "failed", message: "Failed to connect to the database", error: error})
+      });
+
+    db[collection].find(query.find,query.projection).sort().skip(query.skip).limit(query.limit, (err, response) => {
+        if (err) {
+            console.log("err---", err);
+            resolve({status: "failed", message: "Failed to connect to the database", error: err})
+        } else {
+            console.log("response---", response);
+        resolve({status: "success", message: "Documents fetched succesfully", documents: response});
+            
+        }
+
+    })
+});
+
+}catch(err){
+    console.log("err----", err);
+}
+}
+
+function constructQuery(params){
+    var skip = (params.skip!=null)?parseInt(params.skip):0;
 
     var limit = (params.limit!=null)?parseInt(params.limit):20;
     var find = {};
@@ -124,30 +155,11 @@ function getdocuments(params) {
 
     // var sort = (params.sort!=null)?JSON.parse(params.sort):{};
     console.log("find queru===", find)
-    // ,filter,projection,skip,limit
-    return new Promise(function(resolve, reject) {
-    const db = mongojs(params.connection_string);
-
-    db.on('error', function(err) {
-        console.log('we had an error.', err.toString());
-        var error = err.toString()
-        resolve({status: "failed", message: "Failed to connect to the database", error: error})
-      });
-
-    db[collection].find(find,projection).sort().skip(skip).limit(limit, (err, response) => {
-        if (err) {
-            console.log("err---", err);
-            resolve({status: "failed", message: "Failed to connect to the database", error: err})
-        } else {
-            console.log("response---", response);
-        resolve({status: "success", message: "Documents fetched succesfully", documents: response});
-            
-        }
-
-    })
-});
-
-}catch(err){
-    console.log("err----", err);
-}
+    var final_query = {
+        find: find,
+        projection: projection,
+        skip : skip,
+        limit: limit
+    }
+    return final_query;
 }

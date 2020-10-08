@@ -22,5 +22,5 @@ app.use('/validate',  (req, res) => {
 });
 
 app.listen(6066, function () {
-  console.log('App listening on port 8080!')
+  console.log('App listening on port 6066!')
 })

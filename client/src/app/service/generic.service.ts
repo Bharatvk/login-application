@@ -21,6 +21,13 @@ getdocuments (params){
 
 }
 
+downloadRecords(params){
+  console.log("params-- in service", params)
+  return  this.http.post('http://localhost:6066/api/connection/downloadRecords',params)
+}
+downloadFile(params){
+  return  this.http.get('http://localhost:6066/api/connection/downloadFile/'+params.filename);
+}
 
 
 }
