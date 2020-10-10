@@ -85,7 +85,7 @@ export class DashboardComponent implements OnInit {
     console.log("this.findForm.value", this.findForm.value)
     this.GenericService.downloadRecords(this.findForm.value).subscribe((data: any) => {
       console.log(data);
-      this.GenericService.downloadFile(data).subscribe((blob: any) => {
+      // this.GenericService.downloadFile(data).subscribe(() => {
         const a = document.createElement('a')
         // const objectUrl = window.URL.createObjectURL(blob)
         a.href = 'http://localhost:6066/api/connection/downloadFile/'+data.filename;
@@ -93,7 +93,7 @@ export class DashboardComponent implements OnInit {
         // a.target = "_blank"
         a.click();
         // URL.revokeObjectURL(objectUrl);
-      })
+      // })
     });
   }
 }
