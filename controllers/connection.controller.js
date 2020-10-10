@@ -154,10 +154,28 @@ function getAllkeys(o,s){
 console.log("inside validate", k,typeof o[k], k.split(".").length-1);
             if(typeof o[k] != "object"){
                 if(typeof o[k] == "undefined"){
-                    var tempArray = k.split(".");
-                    for(var i =0; i < tempArray.length; i ++){
-                       
+                    // var tempArray = k.split(".");
+                    // const res = tempArray.reduce((obj, k) => obj[k], o);
+                    // console.log(res);
+                    // if(typeof res !="object"){
+                    //     keys.push(tempkey);
+                    // }
+                 
+                    const getValAtNestedPath = (__obj,__path) => {
+                        return __path.split('.').reduce((result,pathVal) => {
+                          if(typeof(result)==="object"){
+                            result = result[pathVal];
+                          }
+                          return result;
+                        },__obj)
+                      }
+                      var res = getValAtNestedPath(o, k);
+                    //    console.log(res);
+                    if(typeof res !="object"){
+                        keys.push(tempkey);
                     }
+                } else {
+                    keys.push(tempkey);
                 }
             }
         }
@@ -250,6 +268,13 @@ function testFunn(){
         "updated_at": "2020-03-03T09:29:22+00:00",
         "updated_by": 7676733332
       }
-      console.log(testObj["history"]);
+      var test = '"history"][0]["created_by"';
+    //   console.log(testObj[test]);
+
+      const keyarray = ['history', '0', 'created_by'];
+// const o = {'k1': { 'k2': {'k3': { 'kn': 'val'}}}};
+
+const res = keyarray.reduce((obj, k) => obj[k], testObj);
+console.log(res);
 }
 module.exports = router;
