@@ -84,6 +84,25 @@ async function downloadRecords(req, res){
         }
         res.status(200).json(response);
       });
+
+
+// FOR JSON STARTS
+ 
+    //   db[collection].find(query.find,query.projection).sort().skip(query.skip).limit(query.limit,function(error,records){
+
+    //     var filename = "export_"+moment().format()
+    //  const output = fs.writeFile("./test/"+filename+".json" ,JSON.stringify(records) ,(err,Jres)=>{
+    // var response = {
+    //     filename : filename+".json"
+    // }
+    // console.log('after',moment().format());
+    // res.status(200).json(response);
+    //  });
+    // } );
+
+
+// FOR JSON ENDS
+
 }
 
 async function downloadFile(req,res){
